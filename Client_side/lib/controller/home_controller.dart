@@ -35,7 +35,7 @@ class HomeController extends GetxController{
     }
     catch (e){
       Get.snackbar('Error',e.toString(),colorText: Colors.red);
-      print(e);
+    
     }
     finally{
       update();

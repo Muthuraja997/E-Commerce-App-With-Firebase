@@ -42,7 +42,6 @@ AddProduct(){
   setValuedefault();
   } catch(e){
     Get.snackbar('Error',e.toString(),colorText: Colors.green);
-    print(e);
   }
  
 }
@@ -57,7 +56,6 @@ AddProduct(){
     }
     catch (e){
       Get.snackbar('Error',e.toString(),colorText: Colors.red);
-      print(e);
     }
     finally{
       update();

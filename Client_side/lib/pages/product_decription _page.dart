@@ -1,4 +1,3 @@
-
 import 'package:cilent_side/model/product/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +33,7 @@ class ProductDecriptionPage extends StatelessWidget {
            const  SizedBox(height: 20,),
              Text(products.description??'' ,style: const TextStyle(fontSize: 16,height: 1.5),),
            const  SizedBox(height: 20,),
-             Text('Rs: ${products.price.toString()?? ''}' ,style: const TextStyle(color: Colors.green,fontSize: 23,fontWeight: FontWeight.bold),),
+             Text('Rs: ${products.price.toString()}' ,style: const TextStyle(color: Colors.green,fontSize: 23,fontWeight: FontWeight.bold),),
            const  SizedBox(height: 20,),
             TextField(
               maxLines: 3,
