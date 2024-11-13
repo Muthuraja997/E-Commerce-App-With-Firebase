@@ -1,3 +1,4 @@
+import 'package:cilent_side/controller/Login_controller.dart';
 import 'package:cilent_side/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<LoginController>(builder: (ctrl){
+      return Scaffold(
       body: Container(
         width: double.maxFinite,
         padding: const EdgeInsets.all(20),
@@ -26,6 +28,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20,),
             TextField(
               keyboardType: TextInputType.phone,
+              controller: ctrl.loginemailctrl,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -40,6 +43,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20,),
             TextField(
               keyboardType: TextInputType.phone,
+              controller: ctrl.loginpasswordctrl,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -51,7 +55,9 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 20,),
             ElevatedButton(
-              onPressed: (){},style:ElevatedButton.styleFrom(
+              onPressed: (){
+                ctrl.loginuser();
+              },style:ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.deepPurple,
               ) ,child: const Text('Login') ),
@@ -62,5 +68,8 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+
+    },);
+    
   }
 }

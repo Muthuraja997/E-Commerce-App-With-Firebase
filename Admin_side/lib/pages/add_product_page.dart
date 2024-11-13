@@ -70,7 +70,7 @@ class AddProduct extends StatelessWidget {
 
               Flexible(
                 child: DropDounWtn(
-                  items: const ['Boots','shoe','Loafers','High heels','Ballet flats'],
+                  items: const ['wearable','computer','Electronics','women dress','audio','Gaming','Home Entertainment','Photography'],
                   selecteditemtext:ctrl.catogary,
                   onSelected: (selectedvalue){
                       ctrl.catogary=selectedvalue ?? 'General';
@@ -80,7 +80,7 @@ class AddProduct extends StatelessWidget {
                   ) ,
                Flexible(
                 child: DropDounWtn(
-                  items: const ['puma','adidas','bata','Sketchers','VKC'],
+                  items: const ['Fitbit','Apple','Samsung','Sony','Canon','Puma','Peter England'],
                   selecteditemtext: ctrl.brand,
                   onSelected: (selectedvalue){
                       ctrl.brand=selectedvalue ?? 'un brand';

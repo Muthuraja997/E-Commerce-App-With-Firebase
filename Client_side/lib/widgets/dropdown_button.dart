@@ -5,7 +5,7 @@ class DropDounWtn extends StatelessWidget {
   final List<String> items;
   final String selecteditemtext;
   final Function(String?) onSelected;
-  const DropDounWtn({super.key, required this.items, required this.selecteditemtext, required this.onSelected(String)});
+  const DropDounWtn({super.key, required this.items, required this.selecteditemtext, required this.onSelected(string)});
 
   @override
   Widget build(BuildContext context) {
