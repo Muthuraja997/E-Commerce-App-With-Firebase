@@ -1,9 +1,10 @@
-import 'package:cilent_side/pages/home_page.dart';
+import 'package:shopping_app_full/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/user/user.dart';
+import '../pages/admin_home_page.dart';
 
 class LoginController extends GetxController {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -14,7 +15,8 @@ class LoginController extends GetxController {
     TextEditingController registerPasswardctrl=TextEditingController();
     TextEditingController loginemailctrl=TextEditingController();
     TextEditingController loginpasswordctrl=TextEditingController();
-
+    TextEditingController adminEmailctr=TextEditingController();
+    TextEditingController adminpasswardctr=TextEditingController();
 
     @override
   void onInit() {
@@ -23,7 +25,7 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
-  AddUser() async {
+  addUser() async {
     try{
       if(registerNamectrl.text.isEmpty || registerEmailctrl.text.isEmpty || registerPasswardctrl.text.isEmpty){
         Get.snackbar('Error','Please fill the feild',colorText: Colors.red);
@@ -74,6 +76,24 @@ class LoginController extends GetxController {
     }
 
   }
- 
+  setlogindefault(){
+    loginemailctrl.clear();
+    loginpasswordctrl.clear();
+    update();
+  }
+
+  allowadmintoLogin(){
+    if(adminEmailctr.text =='muthuraja05980@gmail.com' && adminpasswardctr.text =='muthu'){
+      Get.to(const AdminHomePage());
+    }
+    else{
+      Get.snackbar('Error', 'email and passward are missmatched. give the currect email and passward');
+    }
+  }
+  setAdmindefault(){
+    adminEmailctr.clear();
+    adminpasswardctr.clear();
+    update();
+  }
 
 }

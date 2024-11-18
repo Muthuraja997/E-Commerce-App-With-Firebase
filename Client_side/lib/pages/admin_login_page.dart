@@ -1,10 +1,12 @@
-import 'package:shopping_app_full/controller/login_controller.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopping_app_full/pages/register_page.dart';
+import 'package:shopping_app_full/controller/login_controller.dart';
+import 'package:shopping_app_full/pages/home_page.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class AdminLoginPage extends StatelessWidget {
+  const AdminLoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20,),
             TextField(
               keyboardType: TextInputType.phone,
-              controller: ctrl.loginemailctrl,
+              controller: ctrl.adminEmailctr,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -43,7 +45,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20,),
             TextField(
               keyboardType: TextInputType.phone,
-              controller: ctrl.loginpasswordctrl,
+              controller: ctrl.adminpasswardctr,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -56,16 +58,16 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20,),
             ElevatedButton(
               onPressed: (){
-                ctrl.loginuser();
-                ctrl.setlogindefault();
+                ctrl.allowadmintoLogin();
+                ctrl.setAdmindefault();
               },style:ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.deepPurple,
               ) ,child: const Text('Login') ),
-              TextButton(onPressed: (){
-                ctrl.setlogindefault();
-                Get.to(const RegisterPage());
-              }, child: const Text('Register New Account')),
+              TextButton(onPressed: (){ 
+                Get.to(const HomePage());
+                ctrl.setAdmindefault();
+                }, child:const Text("Go to Home Page"))
           ],
         ),
       ),

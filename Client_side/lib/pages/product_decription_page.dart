@@ -1,14 +1,16 @@
-import 'package:cilent_side/model/product/product.dart';
+import 'package:shopping_app_full/controller/home_controller.dart';
+import 'package:shopping_app_full/model/product/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDecriptionPage extends StatelessWidget {
   const ProductDecriptionPage({super.key});
-
   @override
   Widget build(BuildContext context) {
+  int val=0;
     Product products =Get.arguments['data'];
-    return Scaffold(
+    return GetBuilder<HomeController>(builder:(ctrl){
+        return Scaffold(
       appBar: AppBar( title: const Text('Product Name'),
       ),
       body: SingleChildScrollView(
@@ -16,6 +18,22 @@ class ProductDecriptionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 300.0),
+              
+                
+                child: IconButton(onPressed: (){
+                  if (val==0){
+                  ctrl.productfaverlists(products.id??'');
+                  val=1;
+                  }
+                  else{
+                    val=0;
+                  }
+                },
+                 icon:const Icon(Icons.favorite,),color: val==0 ? Colors.lightGreen:Colors.red
+                ),
+            ),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
@@ -60,5 +78,7 @@ class ProductDecriptionPage extends StatelessWidget {
         ),
       ),
     );
+    });
+    
   }
 }

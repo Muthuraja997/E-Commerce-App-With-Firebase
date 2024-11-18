@@ -10,7 +10,7 @@ import 'firebase_options.dart';
 void main() async {
   //?regeistering my controller
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: AdminFirebaseOptions.currentPlatform);
   Get.put(HomeController());
   runApp(const MyApp());
 }

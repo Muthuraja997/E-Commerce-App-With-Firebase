@@ -1,11 +1,14 @@
-import 'package:cilent_side/controller/home_controller.dart';
-import 'package:cilent_side/widgets/dropdown_button.dart';
-import 'package:cilent_side/widgets/mlutiselect_dropdown.dart';
-import 'package:cilent_side/widgets/product_card.dart';
+import 'package:shopping_app_full/controller/home_controller.dart';
+import 'package:shopping_app_full/pages/admin_login_page.dart';
+import 'package:shopping_app_full/pages/faverlist_page.dart';
+import 'package:shopping_app_full/pages/login_page.dart';
+import 'package:shopping_app_full/pages/setting_page.dart';
+import 'package:shopping_app_full/widgets/dropdown_button.dart';
+import 'package:shopping_app_full/widgets/mlutiselect_dropdown.dart';
+import 'package:shopping_app_full/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'product_decription _page.dart';
+import 'product_decription_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,9 +22,23 @@ class HomePage extends StatelessWidget {
           },
           child: Scaffold(
                 appBar:AppBar( 
+                  automaticallyImplyLeading: false,
           title:const Text('E commerce Store',style: TextStyle(fontWeight: FontWeight.bold),),
+          
           actions: [
-            IconButton(onPressed: (){}, icon:const Icon(Icons.logout)),
+            IconButton(onPressed: (){
+              Get.to(const SettingPage());
+            }, icon:const Icon(Icons.settings)),
+            IconButton(onPressed: ()=>_dialogBuilder(context,),
+             icon:const Icon(Icons.logout)),
+             IconButton(onPressed: ()
+            {
+              Get.to(const FaverlistPage());
+            },
+            icon:const Icon(Icons.favorite,color: Colors.red,),),
+            IconButton(onPressed: (){
+              Get.to(const AdminLoginPage());
+            }, icon:const Icon(Icons.admin_panel_settings_sharp,color: Colors.lightGreenAccent,)),
           ],
                 ),
                 body: Column(
@@ -96,3 +113,40 @@ class HomePage extends StatelessWidget {
     
   }
 }
+
+
+Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Are you sure to logout'),
+          content: const Text(
+            'if you log out your account \n'
+            ' you shoud log in again for your narmal use'
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Yes'),
+              onPressed: () {
+                Get.to(const LoginPage());
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+

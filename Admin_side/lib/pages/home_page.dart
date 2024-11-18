@@ -24,8 +24,7 @@ class HomePage extends StatelessWidget {
                 icon:const Icon(Icons.delete),
                 onPressed: () { 
                   ctrl.deleteproduct((ctrl.products[index].id).toString());
-                   ctrl.update();
-                      
+                   ctrl.update();   
               },
               ),
             );

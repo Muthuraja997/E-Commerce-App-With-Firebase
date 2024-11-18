@@ -26,6 +26,7 @@ class ProductCard extends StatelessWidget {
               fit: BoxFit.cover, 
               width: double.maxFinite,
               height: 120,
+            
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
                 return const Center(child: CircularProgressIndicator());
@@ -35,6 +36,7 @@ class ProductCard extends StatelessWidget {
               },
           
               ),
+             
               const SizedBox(height: 9),
                Text(name,
               style: const TextStyle(fontSize: 16),

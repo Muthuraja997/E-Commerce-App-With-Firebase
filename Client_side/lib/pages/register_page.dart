@@ -1,8 +1,8 @@
-import 'package:cilent_side/pages/login_page.dart';
+import 'package:shopping_app_full/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/Login_controller.dart';
+import '../controller/login_controller.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -64,7 +64,7 @@ class RegisterPage extends StatelessWidget {
         ),
         const SizedBox(height: 20,),
         ElevatedButton(onPressed: (){
-          ctrl.AddUser();
+          ctrl.addUser();
         }, style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
           backgroundColor: Colors.deepPurple,
