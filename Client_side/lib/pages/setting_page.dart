@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shopping_app_full/pages/address_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

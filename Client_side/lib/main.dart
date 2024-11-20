@@ -19,6 +19,9 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+class WebViewPlatform {
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override

@@ -44,6 +44,12 @@ dependencies:
   build_runner: ^2.4.13
   json_serializable: ^6.8.0
   json_annotation: ^4.9.0
+  flutter_paypal_checkout: ^1.0.1
+  # flutter_paypal: ^0.2.0
+
+  webview_flutter: ^4.0.1
+  webview_flutter_android: ^3.16.9
+  webview_flutter_wkwebview: ^3.16.2
 
 dev_dependencies:
   flutter_test:

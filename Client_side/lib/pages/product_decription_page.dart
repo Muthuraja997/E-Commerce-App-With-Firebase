@@ -2,6 +2,8 @@ import 'package:shopping_app_full/controller/home_controller.dart';
 import 'package:shopping_app_full/model/product/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopping_app_full/pages/payement_gatway.dart';
+// import 'package:flutter_paypal/flutter_paypal.dart';
 
 class ProductDecriptionPage extends StatelessWidget {
   const ProductDecriptionPage({super.key});
@@ -72,13 +74,15 @@ class ProductDecriptionPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   backgroundColor: Colors.indigoAccent
                 ),
-                onPressed:(){}, child: const Text('Buy Now',style: TextStyle(fontSize: 18,color: Colors.white),),),
+                onPressed:(){
+                  Get.to(const PayementGatway());
+                }
+                , child: const Text('Buy Now',style: TextStyle(fontSize: 18,color: Colors.white),),),
             )
           ],
         ),
       ),
     );
     });
-    
   }
 }
