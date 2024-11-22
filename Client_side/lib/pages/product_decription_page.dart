@@ -2,7 +2,9 @@ import 'package:shopping_app_full/controller/home_controller.dart';
 import 'package:shopping_app_full/model/product/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shopping_app_full/pages/payement_gatway.dart';
+
+import 'payement_gatway.dart';
+
 // import 'package:flutter_paypal/flutter_paypal.dart';
 
 class ProductDecriptionPage extends StatelessWidget {
@@ -75,7 +77,7 @@ class ProductDecriptionPage extends StatelessWidget {
                   backgroundColor: Colors.indigoAccent
                 ),
                 onPressed:(){
-                  Get.to(const PayementGatway());
+                  Get.to(PayPalIntegration());
                 }
                 , child: const Text('Buy Now',style: TextStyle(fontSize: 18,color: Colors.white),),),
             )
