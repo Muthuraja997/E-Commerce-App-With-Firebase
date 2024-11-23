@@ -77,7 +77,7 @@ class ProductDecriptionPage extends StatelessWidget {
                   backgroundColor: Colors.indigoAccent
                 ),
                 onPressed:(){
-                  Get.to(PayPalIntegration());
+                  Get.to(const PayPalIntegration());
                 }
                 , child: const Text('Buy Now',style: TextStyle(fontSize: 18,color: Colors.white),),),
             )

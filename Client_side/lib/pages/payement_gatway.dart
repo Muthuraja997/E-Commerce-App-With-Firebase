@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 class PayPalIntegration extends StatefulWidget {
+  const PayPalIntegration({super.key});
+
   @override
   _PayPalIntegrationState createState() => _PayPalIntegrationState();
 }
@@ -14,17 +16,13 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
   final String clientId = "AUtXcJG0qu0aBhaVXjeOuvtNoDyh5vzhBsiVHYbptpvSvG3LMyaFrTr0I6jjDEZ3P_5pnRe8cKSzqxrc"; // Replace with your Client ID
   final String secretId = "EPDGhH8UewwHAkYjAHMU-91_dyLyKo1C0eKDdN8gwctAdR2ZueM4r6LNGf466PSvqRVEMKePV3h2D_0q"; // Replace with your Secret ID
   final String paypalUrl = "https://api-m.sandbox.paypal.com"; // Sandbox URL
-  final String returnUrl = "https://example.com/success"; // Replace with your success URL
-  final String cancelUrl = "https://example.com/cancel"; // Replace with your cancel URL
+  final String returnUrl = "https://www.google.com/"; // Replace with your success URL
+  final String cancelUrl = "https://www.google.com/"; // Replace with your cancel URL
 
   String? approvalUrl; // PayPal approval URL
   String? accessToken; // PayPal API access token
 
   @override
-  void initState() {
-    super.initState();
-    _getAccessToken(); // Fetch the access token on initialization
-  }
 
   Future<void> _getAccessToken() async {
     final response = await http.post(
@@ -40,15 +38,16 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      setState(() {
         accessToken = data['access_token'];
-      });
     } else {
       print("Failed to get access token: ${response.body}");
     }
+    print("get access is completed with access_tocken");
+    _startPayment(context);
   }
 
   Future<void> _createPaymentOrder() async {
+    print("came to create account");
     final response = await http.post(
       Uri.parse("$paypalUrl/v2/checkout/orders"),
       headers: {
@@ -71,14 +70,18 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
         },
       }),
     );
-
+    print("almost ready");
     if (response.statusCode == 201) {
       final data = json.decode(response.body);
       final links = data['links'];
+      print("came in respose part");
       for (var link in links) {
         if (link['rel'] == 'approve') {
           setState(() {
             approvalUrl = link['href'];
+            print("object");
+            print(approvalUrl.toString());
+            
           });
           break;
         }
@@ -88,34 +91,58 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
     }
   }
 
-  Future<void> _launchPaymentUrl() async {
-    if (approvalUrl != null && await canLaunchUrl(Uri.parse(approvalUrl!))) {
-      await launchUrl(Uri.parse(approvalUrl!), mode: LaunchMode.externalApplication);
+  Future<void> _launchPaymentUrl(bool inapp) async {
+    print(approvalUrl);
+    if (approvalUrl != null && await canLaunchUrl(Uri.parse(approvalUrl!.toString()))) {
+        if(inapp){
+             await launchUrl(Uri.parse(approvalUrl!.toString()),mode: LaunchMode.inAppWebView);
+        }
+        else{
+        await launchUrl(Uri.parse(approvalUrl!.toString()), mode: LaunchMode.externalApplication);
+        }
     } else {
       print("Cannot launch URL or Approval URL is null.");
     }
   }
 
   void _startPayment(BuildContext context) async {
+    
     await _createPaymentOrder();
+    print('payment created with ${approvalUrl.toString()}');
+
 
     if (approvalUrl != null) {
-      await _launchPaymentUrl();
+        print("lancheduri");
+        await _launchPaymentUrl(false);
     } else {
       print("Approval URL is not available.");
     }
   }
+   void _launchURL(Uri uri,bool inapp) async{
+    try{
+      if(await canLaunchUrl(uri)){
+        if(inapp){
+          await launchUrl(uri,mode: LaunchMode.inAppWebView);
+        }
+        else{
+          await launchUrl(uri,mode: LaunchMode.externalApplication);
+        }
+      }
+    }
+    catch(e){print(e.toString());}
 
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("PayPal Integration")),
+      appBar: AppBar(title: const Text("PayPal Integration")),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => _startPayment(context),
-          child: Text("Pay with PayPal"),
-        ),
-      ),
+            child: ElevatedButton(
+              onPressed: () => _getAccessToken(),
+              child: const Text("Pay with PayPal"),
+            ),
+              
+          ),
     );
   }
 }
