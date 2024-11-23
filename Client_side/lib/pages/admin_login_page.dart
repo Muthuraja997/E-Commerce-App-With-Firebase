@@ -29,7 +29,6 @@ class AdminLoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 20,),
             TextField(
-              keyboardType: TextInputType.phone,
               controller: ctrl.adminEmailctr,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -44,7 +43,6 @@ class AdminLoginPage extends StatelessWidget {
 
             const SizedBox(height: 20,),
             TextField(
-              keyboardType: TextInputType.phone,
               controller: ctrl.adminpasswardctr,
               decoration: InputDecoration(
                 border: OutlineInputBorder(

@@ -27,7 +27,6 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 20,),
             TextField(
-              keyboardType: TextInputType.phone,
               controller: ctrl.loginemailctrl,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -42,7 +41,6 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 20,),
             TextField(
-              keyboardType: TextInputType.phone,
               controller: ctrl.loginpasswordctrl,
               decoration: InputDecoration(
                 border: OutlineInputBorder(

@@ -47,7 +47,6 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
   }
 
   Future<void> _createPaymentOrder() async {
-    print("came to create account");
     final response = await http.post(
       Uri.parse("$paypalUrl/v2/checkout/orders"),
       headers: {
@@ -70,7 +69,6 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
         },
       }),
     );
-    print("almost ready");
     if (response.statusCode == 201) {
       final data = json.decode(response.body);
       final links = data['links'];
