@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'address_for_client.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -14,14 +17,14 @@ class SettingPage extends StatelessWidget {
           ListTile(
             title: const Text('Address Setting'),
             onTap: () {
-              // Get.to(const AddressPageForclient());
+              Get.to(const  AddressForClient());
             },
           ),
            ListTile(
             title: const Text('order Details'),
 
              onTap: () {
-              const  Text("This is a page");
+              
             },
           )
         ],

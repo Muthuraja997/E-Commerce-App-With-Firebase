@@ -69,6 +69,21 @@ class ProductDecriptionPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20,),
+             SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  backgroundColor: Colors.indigoAccent
+                ),
+                
+                onPressed:(){
+                ctrl.collectproductforcart();
+                ctrl.addCarts(products.id??'');
+                }
+                , child: const Text('Add To Cart',style: TextStyle(fontSize: 18,color: Colors.white),),),
+            ),
+            const SizedBox(height: 20,),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -85,6 +100,7 @@ class ProductDecriptionPage extends StatelessWidget {
         ),
       ),
     );
-    });
+    },
+    );
   }
 }

@@ -8,6 +8,7 @@ import 'package:shopping_app_full/widgets/mlutiselect_dropdown.dart';
 import 'package:shopping_app_full/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'add_to_cart.dart';
 import 'product_decription_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (ctrl){
         return RefreshIndicator(
           onRefresh: () async{  
+          
             ctrl.fetchcategory();
           },
           child: Scaffold(
@@ -26,6 +28,9 @@ class HomePage extends StatelessWidget {
           title:const Text('E commerce Store',style: TextStyle(fontWeight: FontWeight.bold),),
           
           actions: [
+            IconButton(onPressed: (){
+              Get.to(const AddToCart());
+            }, icon: const Icon(Icons.add_shopping_cart)),
             IconButton(onPressed: (){
               Get.to(const SettingPage());
             }, icon:const Icon(Icons.settings)),
@@ -51,7 +56,6 @@ class HomePage extends StatelessWidget {
                 return InkWell(
                   onTap: (){
                     ctrl.filterByCategory(ctrl.productCatogaries[index].name?? '');
-          
                   },
                   child: Padding(
                     padding:  const EdgeInsets.all(6),

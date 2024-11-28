@@ -27,6 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialRoute: '/HomePage', // Initial route
+      routes: {
+        '/HomePage': (context) => const HomePage(), // Registering the route
+      },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

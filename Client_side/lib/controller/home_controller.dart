@@ -1,3 +1,4 @@
+import 'package:shopping_app_full/model/cart/cart.dart';
 import 'package:shopping_app_full/model/product_category/product_category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,27 +10,46 @@ class HomeController extends GetxController{
   FirebaseFirestore firestore=FirebaseFirestore.instance;
   late CollectionReference productCollection;
   late CollectionReference categoryCollection;
-
+  late CollectionReference cartCollection;
   TextEditingController productNameCtrl=TextEditingController();
   TextEditingController productDescriptionCtrl=TextEditingController();
   TextEditingController productImagCtrl=TextEditingController();
   TextEditingController productPriceCtrl=TextEditingController();
- 
+  TextEditingController cartIdCtrl=TextEditingController();
   String catogary='general';
   String brand=' un brande';
   bool offer=false;
-
+  List<Product>productforcart=[];
   List<Product>products=[];
   List<Product>productShow=[];
   List<Product>faverlists=[];
+  List<Cart>cartlist=[];
   List<ProductCategory> productCatogaries=[];
     @override
     Future<void> onInit() async {
       productCollection=firestore.collection('products');
       categoryCollection=firestore.collection('category');
+      cartCollection=firestore.collection('Carts');
       await fetchcategory();
       await fetchproducts();
+      await fetchcartids();
+      await collectproductforcart();
       super.onInit();
+    }
+    fetchcartids() async {
+      try{
+        QuerySnapshot cartSnapshote=await cartCollection.get();
+        final List<Cart>retrevedcarts=cartSnapshote.docs.map((doc)=>Cart.fromJson(doc.data() as Map<String,dynamic>)).toList();
+        cartlist.clear();
+        cartlist.assignAll(retrevedcarts);
+      }
+      catch(e){
+        Get.snackbar("Error",e.toString(),colorText: Colors.red);
+      }
+      finally{
+        update();
+      }
+
     }
   fetchproducts() async {
     try{
@@ -51,6 +71,39 @@ class HomeController extends GetxController{
 
   }
   
+  addCarts(String valuesofcart){
+    try{
+      fetchcartids();
+      bool v= false;
+      for(var i in cartlist){
+        if(i.productid==valuesofcart){
+          v=true;
+          break;
+        }
+      }
+      if(v==true){
+        Get.snackbar("Already this prodect in Cart", "If you want remove from cart you should remove from cart page");
+        return;
+      }
+      else{
+      DocumentReference doc=cartCollection.doc();
+      Cart cart=Cart(
+        productid: valuesofcart,
+      );
+      final cartJson=cart.toJson();
+      doc.set(cartJson);
+      Get.snackbar('Success', ' Product Added Successfully',colorText: Colors.green);
+     }
+    }
+    catch(e){
+      Get.snackbar("Error", e.toString(),colorText: Colors.red);
+    }
+    finally{
+      update();
+      fetchcartids();
+    }
+  }
+
   addProduct(){
   try{
      DocumentReference doc=productCollection.doc();
@@ -150,6 +203,15 @@ class HomeController extends GetxController{
   productfaverlists(String productid) async{
     List<Product> faverlis=products.where((product)=>product.id==productid).toList();
     faverlists.addAll(faverlis);
+    update();
+  }
+  collectproductforcart(){
+    fetchcartids();
+    productforcart.clear();
+    for(var i in cartlist){
+      List<Product>allcard=products.where((product)=>product.id==i.productid).toList();
+      productforcart.addAll(allcard);
+    }
     update();
   }
 }

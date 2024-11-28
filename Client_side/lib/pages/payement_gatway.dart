@@ -23,7 +23,6 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
   String? accessToken; // PayPal API access token
 
   @override
-
   Future<void> _getAccessToken() async {
     final response = await http.post(
       Uri.parse("$paypalUrl/v1/oauth2/token"),
@@ -72,13 +71,13 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
     if (response.statusCode == 201) {
       final data = json.decode(response.body);
       final links = data['links'];
-      print("came in respose part");
+    
       for (var link in links) {
         if (link['rel'] == 'approve') {
           setState(() {
             approvalUrl = link['href'];
-            print("object");
-            print(approvalUrl.toString());
+           
+            
             
           });
           break;
@@ -110,7 +109,7 @@ class _PayPalIntegrationState extends State<PayPalIntegration> {
 
 
     if (approvalUrl != null) {
-        print("lancheduri");
+        
         await _launchPaymentUrl(false);
     } else {
       print("Approval URL is not available.");

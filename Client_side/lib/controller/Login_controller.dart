@@ -17,11 +17,14 @@ class LoginController extends GetxController {
     TextEditingController loginpasswordctrl=TextEditingController();
     TextEditingController adminEmailctr=TextEditingController();
     TextEditingController adminpasswardctr=TextEditingController();
+    List<User>users=[];
+    
+
 
     @override
   void onInit() {
     userCollecton=firestore.collection('users');
-    
+    fetchAllUsers();
     super.onInit();
   }
 
@@ -48,7 +51,7 @@ class LoginController extends GetxController {
       id:doc.id,
       name:registerNamectrl.text,
       email:registerEmailctrl.text,
-      passward:registerPasswardctrl.text,
+      password:registerPasswardctrl.text,
     );
     final userJson=user.toJson();
     doc.set(userJson);
@@ -56,20 +59,39 @@ class LoginController extends GetxController {
     registerNamectrl.clear();
     registerEmailctrl.clear();
     registerPasswardctrl.clear();
+    fetchAllUsers();
     
     } catch(e){
       Get.snackbar('Error',e.toString(),colorText: Colors.green);
    
     }
+    finally{
+      update();
+    }
   
   }
     
-  loginuser(){
+  loginuser()async {
+    
     try{
+      bool t=false;
+     
+      for(var user in users)
+      {
+        if(loginemailctrl.text==user.email && loginpasswordctrl.text==user.password){
+          t=true;
+          break;
+        }
+      }
+      if(t==false){
+        Get.snackbar("Invalid Email", "given email id is does not exist kindly register it");
+        return;
+      }
       if(loginemailctrl.text.isEmpty || loginpasswordctrl.text.isEmpty){
         Get.snackbar('Error', 'Please Fill all The feild');
         return;
       }
+    
       Get.to(const HomePage());
     }catch(e){
       Get.snackbar('Error', e.toString(),colorText: Colors.red);
@@ -96,4 +118,19 @@ class LoginController extends GetxController {
     update();
   }
 
+  fetchAllUsers() async {
+  try {
+    QuerySnapshot userSnapshot = await userCollecton.get();
+    final List<User>userList=userSnapshot.docs.map((doc)=>User.fromJson(
+      doc.data()as Map<String,dynamic>)).toList();
+      users.clear();
+      users.assignAll(userList);
+      update();
+    }
+  catch(e) {
+    Get.snackbar('Error', 'Failed to fetch users: ${e.toString()}',
+        colorText: Colors.red);
+  }
 }
+}
+

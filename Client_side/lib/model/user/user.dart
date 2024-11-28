@@ -12,14 +12,14 @@ class User {
   @JsonKey(name: "email")
   String? email;
 
-  @JsonKey(name:'passward')
-  String? passward;
+  @JsonKey(name:'password')
+  String? password;
   
   User({
     this.id,
     this.name,
     this.email,
-     required String passward
+    this.password
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
