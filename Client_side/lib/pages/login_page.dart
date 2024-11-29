@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                prefixIcon: const Icon(Icons.phone_android),
+                prefixIcon: const Icon(Icons.email_outlined),
                 labelText: 'Email Id',
                 hintText:  'Enter your Email Address',
 

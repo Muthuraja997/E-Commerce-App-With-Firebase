@@ -31,7 +31,7 @@ class RegisterPage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              prefixIcon: const Icon(Icons.phone_android),
+              prefixIcon: const Icon(Icons.person),
               labelText: 'Your Name',
               hintText: 'Enter your Name',
             ),
@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              prefixIcon: const Icon(Icons.phone_android),
+              prefixIcon: const Icon(Icons.email_outlined),
               labelText: 'Email Id',
               hintText: 'Enter your Email Address',
             ),
@@ -57,7 +57,7 @@ class RegisterPage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              prefixIcon: const Icon(Icons.phone_android),
+              prefixIcon: const Icon(Icons.password),
               labelText: 'Passward',
               hintText: 'Enter The New Passward',
             ),

@@ -71,9 +71,9 @@ class HomeController extends GetxController{
 
   }
   
-  addCarts(String valuesofcart){
+  addCarts(String valuesofcart) async {
     try{
-      fetchcartids();
+      await fetchcartids();
       bool v= false;
       for(var i in cartlist){
         if(i.productid==valuesofcart){
@@ -91,8 +91,10 @@ class HomeController extends GetxController{
         productid: valuesofcart,
       );
       final cartJson=cart.toJson();
-      doc.set(cartJson);
+      await doc.set(cartJson);
       Get.snackbar('Success', ' Product Added Successfully',colorText: Colors.green);
+     await fetchcartids();
+     collectproductforcart();
      }
     }
     catch(e){
@@ -100,7 +102,6 @@ class HomeController extends GetxController{
     }
     finally{
       update();
-      fetchcartids();
     }
   }
 
@@ -196,9 +197,32 @@ class HomeController extends GetxController{
       Get.snackbar('Error',e.toString(),colorText: Colors.red);
     }
     finally{
+     
       fetchproducts();
     }
-
+  }
+  deleteproductcart(String productid) async {
+    try{
+    QuerySnapshot querySnapshot = await cartCollection.where('productid', isEqualTo: productid).get();
+    
+    if (querySnapshot.docs.isNotEmpty) {
+      
+      for (var doc in querySnapshot.docs) {
+        
+        await cartCollection.doc(doc.id).delete();
+      }
+      await fetchcartids();
+      collectproductforcart();
+      Get.snackbar("Success", "cart product has been deleted from cart list",colorText: Colors.green);
+    } else {
+      Get.snackbar("Error", "Product not found in the cart list", colorText: Colors.red);
+    }
+    }catch(e){
+      Get.snackbar('Error',e.toString(),colorText: Colors.red);
+    }
+    finally{
+      update();
+    }
   }
   productfaverlists(String productid) async{
     List<Product> faverlis=products.where((product)=>product.id==productid).toList();

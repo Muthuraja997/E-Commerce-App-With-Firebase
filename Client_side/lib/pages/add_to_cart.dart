@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping_app_full/controller/home_controller.dart';
+import 'package:shopping_app_full/pages/cart_product_description.dart';
 
 import '../widgets/product_card.dart';
 
@@ -14,9 +15,13 @@ class AddToCart extends StatelessWidget {
         appBar:AppBar( 
             // automaticallyImplyLeading: false,
           title:const Text('Your Cart' ,style: TextStyle(fontWeight: FontWeight.bold),),
+
       ),
+      
       body: Column(
+      
               children: [
+                
                 Expanded(
               child: GridView.builder(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -32,8 +37,7 @@ class AddToCart extends StatelessWidget {
                      price:ctrl.productforcart[index].price?? 0, 
                      offertag: '80%', 
                     onTap:(){
-                          // Get.to(const ProductDecriptionPage(),arguments: {'data':ctrl.productShow[index]});
-          
+                          Get.to(const CartProductDescription(),arguments: {'data':ctrl.productforcart[index]});
                     },);
                  }
                  
