@@ -36,6 +36,7 @@ class AddToCart extends StatelessWidget {
                     imageUrl: ctrl.productforcart[index].image?? 'https://tse2.mm.bing.net/th?id=OIP.iDE1Txt9k3LiX7zzIv2V0wHaEo&pid=Api&P=0&h=180',
                      price:ctrl.productforcart[index].price?? 0, 
                      offertag: '80%', 
+                     description: ctrl.productforcart[index].description?? '',
                     onTap:(){
                           Get.to(const CartProductDescription(),arguments: {'data':ctrl.productforcart[index]});
                     },);

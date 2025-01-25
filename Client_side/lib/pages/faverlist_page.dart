@@ -16,7 +16,7 @@ class FaverlistPage extends StatelessWidget {
           itemCount: ctrl.faverlists.length,
           itemBuilder: (context,index){
           return ProductCard(
-            name: ctrl.faverlists[index].name??'', imageUrl: ctrl.faverlists[index].image??'', price: ctrl.faverlists[index].price?? 0, offertag: '80%', onTap:(){});
+            name: ctrl.faverlists[index].name??'', imageUrl: ctrl.faverlists[index].image??'', price: ctrl.faverlists[index].price?? 0, offertag: '80%', onTap:(){},description:  ctrl.faverlists[index].description?? '');
         })
         );
       

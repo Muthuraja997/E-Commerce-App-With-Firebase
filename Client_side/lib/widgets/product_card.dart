@@ -6,8 +6,9 @@ class ProductCard extends StatelessWidget {
   final String imageUrl;
   final double price;
   final String offertag;
+  final String description;
   final Function onTap;
-  const ProductCard({super.key, required this.name, required this.imageUrl, required this.price, required this.offertag, required this.onTap});
+  const ProductCard({super.key, required this.name, required this.imageUrl, required this.price, required this.offertag, required this.onTap, required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,13 @@ class ProductCard extends StatelessWidget {
                 ),
                 child: Text('$offertag offer',style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                 
-              )
+              ),
+              Text('$description',
+              style: const TextStyle(fontSize: 16),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              
+              ),
             ],
           ),
         ),

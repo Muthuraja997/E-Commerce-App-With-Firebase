@@ -238,4 +238,21 @@ class HomeController extends GetxController{
     }
     update();
   }
+   
+
+
+   void searchProductByName(String query) {
+  if (query.isEmpty) {
+    productShow = products; // Show all products when search is cleared
+  } else {
+    productShow = products.where((product) => 
+      product.name!.toLowerCase().contains(query.toLowerCase())
+    ).toList();
+  }
+  update();
+}
+
+
+
+
 }
