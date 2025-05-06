@@ -57,17 +57,17 @@ class ProductDecriptionPage extends StatelessWidget {
            const  SizedBox(height: 20,),
              Text('Rs: ${products.price.toString()}' ,style: const TextStyle(color: Colors.green,fontSize: 23,fontWeight: FontWeight.bold),),
            const  SizedBox(height: 20,),
-            TextField(
-              maxLines: 3,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+            // TextField(
+            //   maxLines: 3,
+            //   decoration: InputDecoration(
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(12),
 
-                ),
-                labelText: 'Enter your Billing Addresss',
+            //     ),
+            //     labelText: 'Enter your Billing Addresss',
 
-              ),
-            ),
+            //   ),
+            // ),
             const SizedBox(height: 20,),
              SizedBox(
               width: double.infinity,
